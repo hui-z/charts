@@ -116,7 +116,9 @@ class ChartCanvas implements common.ChartCanvas {
       Rectangle<num> clipBounds,
       common.Color fill,
       common.Color stroke,
-      double strokeWidthPx}) {
+      double strokeWidthPx,
+      bool fillGradient,
+      bool smoothLine = false }) {
     _polygonPainter ??= new PolygonPainter();
     _polygonPainter.draw(
         canvas: canvas,
@@ -125,7 +127,9 @@ class ChartCanvas implements common.ChartCanvas {
         clipBounds: clipBounds,
         fill: fill,
         stroke: stroke,
-        strokeWidthPx: strokeWidthPx);
+        strokeWidthPx: strokeWidthPx,
+        fillGradient: fillGradient,
+        smoothLine: smoothLine);
   }
 
   @override
@@ -149,6 +153,30 @@ class ChartCanvas implements common.ChartCanvas {
     switch (pattern) {
       case common.FillPatternType.forwardHatch:
         _drawForwardHatchPattern(myBounds, canvas, fill: fill);
+        break;
+      case common.FillPatternType.gradient:
+        _paint.style = PaintingStyle.fill;
+        _paint.shader = LinearGradient(
+          colors: [
+            Color.fromARGB(
+              255,
+              fill.r,
+              fill.g,
+              fill.b,
+            ),
+            Color.fromARGB(
+              127,
+              fill.r,
+              fill.g,
+              fill.b,
+            )
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ).createShader(_getRect(myBounds));
+
+        canvas.drawRect(_getRect(myBounds), _paint);
+        _paint.shader = null;
         break;
 
       case common.FillPatternType.solid:

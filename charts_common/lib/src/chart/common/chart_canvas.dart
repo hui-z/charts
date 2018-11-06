@@ -93,7 +93,9 @@ abstract class ChartCanvas {
       Rectangle<num> clipBounds,
       Color fill,
       Color stroke,
-      double strokeWidthPx});
+      double strokeWidthPx,
+      bool fillGradient,
+      bool smoothLine});
 
   /// Renders a simple rectangle.
   void drawRect(Rectangle<num> bounds,
@@ -142,4 +144,5 @@ Color getAnimatedColor(Color previous, Color target, double animationPercent) {
 ///   on top of a bar filled with the fill color.
 /// * [solid] defines a simple bar filled with the fill color. This is the
 ///   default pattern for bars.
-enum FillPatternType { forwardHatch, solid }
+/// * [gradient] defines a simple bar filled with the gradient color
+enum FillPatternType { forwardHatch, solid, gradient }

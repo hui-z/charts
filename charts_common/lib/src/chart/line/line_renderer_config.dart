@@ -73,6 +73,8 @@ class LineRendererConfig<D> extends LayoutViewConfig
   /// Whether lines should have round end caps, or square if false.
   final bool roundEndCaps;
 
+  final bool fillGradient;
+
   LineRendererConfig(
       {this.customRendererId,
       this.radiusPx = 3.5,
@@ -86,6 +88,7 @@ class LineRendererConfig<D> extends LayoutViewConfig
       this.areaOpacity = 0.1,
       this.smoothLine = false,
       this.roundEndCaps = false,
+      this.fillGradient = false,
       SymbolRenderer symbolRenderer})
       : this.strokeWidthPx = strokeWidthPx,
         this.symbolRenderer = symbolRenderer ?? new LineSymbolRenderer();
