@@ -154,7 +154,8 @@ export 'package:charts_common/common.dart'
         TypedAccessorFn,
         UTCDateTimeFactory,
         ViewMargin,
-        VocalizationCallback;
+        VocalizationCallback,
+        RangeBandConfig;
 
 export 'src/bar_chart.dart';
 export 'src/base_chart.dart' show BaseChart, LayoutConfig;

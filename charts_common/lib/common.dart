@@ -40,6 +40,7 @@ export 'src/chart/cartesian/axis/axis.dart'
         NumericAxis,
         OrdinalAxis,
         OrdinalViewport;
+export 'src/chart/cartesian/axis/scale.dart' show RangeBandConfig;
 export 'src/chart/cartesian/axis/numeric_extents.dart' show NumericExtents;
 export 'src/chart/cartesian/axis/draw_strategy/gridline_draw_strategy.dart'
     show GridlineRendererSpec;

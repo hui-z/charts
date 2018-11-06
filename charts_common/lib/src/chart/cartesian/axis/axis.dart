@@ -33,7 +33,7 @@ import 'axis_tick.dart' show AxisTicks;
 import 'linear/linear_scale.dart' show LinearScale;
 import 'ordinal_tick_provider.dart' show OrdinalTickProvider;
 import 'numeric_tick_provider.dart' show NumericTickProvider;
-import 'scale.dart' show MutableScale, ScaleOutputExtent, Scale;
+import 'scale.dart' show MutableScale, ScaleOutputExtent, Scale, RangeBandConfig;
 import 'numeric_extents.dart' show NumericExtents;
 import 'numeric_scale.dart' show NumericScale;
 import 'simple_ordinal_scale.dart' show SimpleOrdinalScale;
@@ -528,6 +528,10 @@ class OrdinalAxis extends Axis<String> {
     autoViewport = false;
     (_scale as SimpleOrdinalScale)
         .setViewport(viewport.dataSize, viewport.startingDomain);
+  }
+
+  void setRangeBandConfig(RangeBandConfig rangeBandConfig) {
+    mutableScale.rangeBandConfig = rangeBandConfig;
   }
 
   @override

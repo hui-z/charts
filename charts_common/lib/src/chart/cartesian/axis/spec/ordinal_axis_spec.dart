@@ -24,10 +24,13 @@ import '../tick_formatter.dart' show OrdinalTickFormatter;
 import 'axis_spec.dart'
     show AxisSpec, TickProviderSpec, TickFormatterSpec, RenderSpec;
 import 'tick_spec.dart' show TickSpec;
+import '../scale.dart' show RangeBandConfig;
 
 /// [AxisSpec] specialized for ordinal/non-continuous axes typically for bars.
 @immutable
 class OrdinalAxisSpec extends AxisSpec<String> {
+  final RangeBandConfig rangeBandConfig;
+
   /// Sets viewport for this Axis.
   ///
   /// If pan / zoom behaviors are set, this is the initial viewport.
@@ -49,19 +52,26 @@ class OrdinalAxisSpec extends AxisSpec<String> {
     OrdinalTickFormatterSpec tickFormatterSpec,
     bool showAxisLine,
     this.viewport,
+    this.rangeBandConfig,
   }) : super(
             renderSpec: renderSpec,
             tickProviderSpec: tickProviderSpec,
             tickFormatterSpec: tickFormatterSpec,
-            showAxisLine: showAxisLine);
+            showAxisLine: showAxisLine,
+            rangeBandConfig: rangeBandConfig);
 
   @override
   configure(Axis<String> axis, ChartContext context,
       GraphicsFactory graphicsFactory) {
     super.configure(axis, context, graphicsFactory);
 
-    if (axis is OrdinalAxis && viewport != null) {
-      axis.setScaleViewport(viewport);
+    if (axis is OrdinalAxis) {
+      if (viewport != null) {
+        axis.setScaleViewport(viewport);
+      }
+      if (rangeBandConfig != null) {
+        axis.setRangeBandConfig(rangeBandConfig);
+      }
     }
   }
 
