@@ -36,7 +36,7 @@ class MonotoneX {
     return path;
   }
 
-  static Path addPath(Path path, List<Point> points, [bool reversed = false]) {
+  static Path addCurve(Path path, List<Point> points, [bool reversed = false]) {
     var targetPoints = List<Point>();
     targetPoints.addAll(points);
     targetPoints.add(Point(

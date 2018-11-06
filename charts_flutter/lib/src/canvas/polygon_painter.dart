@@ -116,17 +116,17 @@ class PolygonPainter {
           path.lineTo(points[0].x.toDouble(), points[0].y.toDouble());
           path.lineTo(points[1].x.toDouble(), points[1].y.toDouble());
           path.lineTo(points[2].x.toDouble(), points[2].y.toDouble());
-          MonotoneX.addPath(path,points.sublist(2));
+          MonotoneX.addCurve(path,points.sublist(2));
         } else {
           path.moveTo(points.last.x.toDouble(), points.last.y.toDouble());
           path.lineTo(points[0].x.toDouble(), points[0].y.toDouble());
 
-          MonotoneX.addPath(path,
+          MonotoneX.addCurve(path,
               points.sublist(0, points.length ~/ 2).reversed.toList(), true);
           path.lineTo(points[points.length ~/ 2].x,
               points[points.length ~/ 2].y.toDouble());
 
-          MonotoneX.addPath(path, points.sublist(points.length ~/ 2));
+          MonotoneX.addCurve(path, points.sublist(points.length ~/ 2));
 
           path.lineTo(points.last.x.toDouble(), points.last.y.toDouble());
         }
