@@ -154,7 +154,33 @@ class ChartCanvas implements common.ChartCanvas {
       case common.FillPatternType.forwardHatch:
         _drawForwardHatchPattern(myBounds, canvas, fill: fill);
         break;
-      case common.FillPatternType.gradient:
+      case common.FillPatternType.gradientTop:
+      case common.FillPatternType.gradientBottom:
+      case common.FillPatternType.gradientLeft:
+      case common.FillPatternType.gradientRight:
+        var begin = Alignment.topCenter;
+        var end = Alignment.bottomCenter;
+        switch (pattern) {
+          case common.FillPatternType.gradientTop:
+            begin = Alignment.bottomCenter;
+            end = Alignment.topCenter;
+            break;
+          case common.FillPatternType.gradientBottom:
+            begin = Alignment.topCenter;
+            end = Alignment.bottomCenter;
+            break;
+          case common.FillPatternType.gradientLeft:
+            begin = Alignment.centerRight;
+            end = Alignment.centerLeft;
+            break;
+          case common.FillPatternType.gradientRight:
+            begin = Alignment.centerLeft;
+            end = Alignment.centerRight;
+            break;
+          default:
+            break;
+        }
+
         _paint.style = PaintingStyle.fill;
         _paint.shader = LinearGradient(
           colors: [
@@ -171,9 +197,10 @@ class ChartCanvas implements common.ChartCanvas {
               fill.b,
             )
           ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
+          begin: begin,
+          end: end,
         ).createShader(_getRect(myBounds));
+
 
         canvas.drawRect(_getRect(myBounds), _paint);
         _paint.shader = null;
